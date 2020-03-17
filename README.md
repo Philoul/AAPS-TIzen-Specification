@@ -4,7 +4,7 @@
 
 ### Watchface update flowchart and description
 
-<img src=images/Watchface_Update.png">
+<img src="images/Watchface_Update.png">
 
 | **N°** | **Description**                                              | **Module**                                 |
 | ------ | ------------------------------------------------------------ | ------------------------------------------ |
@@ -25,7 +25,7 @@
 
 ### Command flowchart and description
 
-<img src=images/Command_Flowchart.png">
+<img src="images/Command_Flowchart.png">
 
 | **N°** | **Description**                                              | **Module**                                 |
 | ------ | ------------------------------------------------------------ | ------------------------------------------ |
