@@ -86,6 +86,88 @@ to be completed (keyword, data structure)
 
 to be completed (keyword, data structure)
 
+#### Command received by TizenUpdaterService
+
+Method:
+
+```
+public void onReceive(int channelID, byte[] data)
+```
+
+
+
+#### Command received by WatchUpdaterService
+
+Method:
+
+```java
+public void onMessageReceived(MessageEvent event)
+```
+
+```java
+	String path = event.getPath();
+```
+
+```java
+	String actionstring = new String(event.getData());
+```
+
+
+
+| Path                                                         | Action                                               |
+| ------------------------------------------------------------ | ---------------------------------------------------- |
+| WEARABLE_RESEND_PATH = "/nightscout_watch_data_resend"       | resendData()                                         |
+| WEARABLE_CANCELBOLUS_PATH = "/nightscout_watch_cancel_bolus" | cancelBolus()                                        |
+| WEARABLE_INITIATE_ACTIONSTRING_PATH = "/nightscout_watch_initiateactionstring" | ActionStringHandler.handleInitiate(actionstring)     |
+| WEARABLE_CONFIRM_ACTIONSTRING_PATH = "/nightscout_watch_confirmactionstring" | ActionStringHandler.handleConfirmation(actionstring) |
+
+#### ActionStringHandler : Class of Wear plugin
+
+method
+
+```
+public synchronized static void handleInitiate(String actionstring)
+```
+
+action string split with regex "\\\s+"
+
+| Keyword (act[0])      | 1rst param (act[1])                  | 2nd param (act[2])            |                              |                       |
+| --------------------- | ------------------------------------ | ----------------------------- | ---------------------------- | --------------------- |
+| "fillpreset"          | "1"<br />"2"<br />"3"                |                               |                              |                       |
+| "fill"                | amount (SafeParse.stringToDouble)    |                               |                              |                       |
+| "bolus"               | insulin (stringToDouble)             | carbs (stringToDouble)        |                              |                       |
+| "temptarget"          | isMGDL (parseBoolean)                | duration (stringToInt)        | low (stringToDouble)         | high (stringToDouble) |
+| "status"              | "pump"<br />"loop"                   |                               |                              |                       |
+| "wizard2"             | carbsBeforeConstraints (stringToInt) | percentage (Integer.parseInt) |                              |                       |
+| "opencpp"             |                                      |                               |                              |                       |
+| "cppset"              | timeshift                            | percentage                    |                              |                       |
+| "tddstats"            |                                      |                               |                              |                       |
+| "ecarbs"              | carbs (stringToInt)                  | starttime (min)(stringToInt)  | duration (hour)(stringToInt) |                       |
+| "changeRequest"       |                                      |                               |                              |                       |
+| "cancelChangeRequest" |                                      |                               |                              |                       |
+
+Timeout : 65s
+
+rTitle : Title of response (text)
+
+rMessage : detailled answer (text)
+
+rAction : action for acknowledge
+
+```java
+	WearPlugin.getPlugin().requestActionConfirmation(rTitle, rMessage, rAction)
+```
+
+
+
+```
+public synchronized static void handleConfirmation(String actionString)
+```
+
+action string split with regex "\\\s+"
+
+
+
 ## Settings
 
 To be decide if we include watchface settings (background color, hidden or visible informations, ...) in UI application in watch, or in AAPS wear plugin (dedicated screen prepared but empty today).
