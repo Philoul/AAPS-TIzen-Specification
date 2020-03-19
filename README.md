@@ -78,6 +78,46 @@ to be completed
 
 ## Data exchange
 
+### Service configuration
+
+#### accessoryservices.xml:
+
+- serviceProfile1 
+
+  - id="/androidaps/tizen/app"
+  - name="androidaps_tizen_app"
+  - role="provider"
+  - serviceImpl="info.nightscout.androidaps.plugins.general.wear.tizenintegration.TizenUpdaterService"
+  - serviceChannel : 104 (for tests), 
+    - 110: Tizen resend data request
+    - 115: Tizen cancel bolus
+    - 120: Tizen confirm action
+    - 121: AAPS action confirmation request
+    - 125: Tizen initiate action
+    - 
+
+- serviceProfile2 (not implemented, and to be confirm)
+
+  - id="/androidaps/tizen/watchface"
+
+  - name="androidaps_tizen_watchface"
+
+  - role="provider"
+
+  - serviceImpl="info.nightscout.androidaps.plugins.general.wear.tizenintegration.TizenUpdaterService"
+
+  - serviceChannel : 105 (tests)
+
+    - action send data (sendData and resendData)
+
+    - action send status
+
+    - action send basals
+
+      
+
+  
+
 ### Watchface data
 
 to be completed (keyword, data structure)
@@ -93,6 +133,15 @@ Method:
 ```
 public void onReceive(int channelID, byte[] data)
 ```
+
+
+
+| Path                                      | Action                                               |
+| ----------------------------------------- | ---------------------------------------------------- |
+| WEARABLE_RESEND_PATH = 110                | resendData()                                         |
+| WEARABLE_CANCELBOLUS_PATH = 115           | cancelBolus()                                        |
+| WEARABLE_INITIATE_ACTIONSTRING_PATH = 120 | ActionStringHandler.handleInitiate(actionstring)     |
+| WEARABLE_CONFIRM_ACTIONSTRING_PATH = 125  | ActionStringHandler.handleConfirmation(actionstring) |
 
 
 
@@ -121,6 +170,8 @@ public void onMessageReceived(MessageEvent event)
 | WEARABLE_INITIATE_ACTIONSTRING_PATH = "/nightscout_watch_initiateactionstring" | ActionStringHandler.handleInitiate(actionstring)     |
 | WEARABLE_CONFIRM_ACTIONSTRING_PATH = "/nightscout_watch_confirmactionstring" | ActionStringHandler.handleConfirmation(actionstring) |
 
+
+
 #### ActionStringHandler : Class of Wear plugin
 
 method
@@ -131,20 +182,20 @@ public synchronized static void handleInitiate(String actionstring)
 
 action string split with regex "\\\s+"
 
-| Keyword (act[0])      | 1rst param (act[1])                  | 2nd param (act[2])            |                              |                       |
-| --------------------- | ------------------------------------ | ----------------------------- | ---------------------------- | --------------------- |
-| "fillpreset"          | "1"<br />"2"<br />"3"                |                               |                              |                       |
-| "fill"                | amount (SafeParse.stringToDouble)    |                               |                              |                       |
-| "bolus"               | insulin (stringToDouble)             | carbs (stringToDouble)        |                              |                       |
-| "temptarget"          | isMGDL (parseBoolean)                | duration (stringToInt)        | low (stringToDouble)         | high (stringToDouble) |
-| "status"              | "pump"<br />"loop"                   |                               |                              |                       |
-| "wizard2"             | carbsBeforeConstraints (stringToInt) | percentage (Integer.parseInt) |                              |                       |
-| "opencpp"             |                                      |                               |                              |                       |
-| "cppset"              | timeshift                            | percentage                    |                              |                       |
-| "tddstats"            |                                      |                               |                              |                       |
-| "ecarbs"              | carbs (stringToInt)                  | starttime (min)(stringToInt)  | duration (hour)(stringToInt) |                       |
-| "changeRequest"       |                                      |                               |                              |                       |
-| "cancelChangeRequest" |                                      |                               |                              |                       |
+| Keyword (act[0])    | 1rst param (act[1])                     | 2nd param (act[2])               | 3rd param (act[3])               | 4th param (act[4])       |
+| ------------------- | --------------------------------------- | -------------------------------- | -------------------------------- | ------------------------ |
+| fillpreset          | "1"<br />"2"<br />"3"                   |                                  |                                  |                          |
+| fill                | amount<br />stringToDouble              |                                  |                                  |                          |
+| bolus               | insulin<br />stringToDouble             | carbs<br />stringToDouble        |                                  |                          |
+| temptarget          | isMGDL<br />parseBoolean                | duration<br />stringToInt        | low<br />stringToDouble          | high<br />stringToDouble |
+| status              | "pump"<br />"loop"                      |                                  |                                  |                          |
+| wizard2             | carbsBeforeConstraints<br />stringToInt | percentage<br />Integer.parseInt |                                  |                          |
+| opencpp             |                                         |                                  |                                  |                          |
+| cppset              | timeshift                               | percentage                       |                                  |                          |
+| tddstats            |                                         |                                  |                                  |                          |
+| ecarbs              | carbs<br />stringToInt                  | starttime (min)<br />stringToInt | duration (hour)<br />stringToInt |                          |
+| changeRequest       |                                         |                                  |                                  |                          |
+| cancelChangeRequest |                                         |                                  |                                  |                          |
 
 Timeout : 65s
 
