@@ -58,7 +58,8 @@ You enter Carbs amount (with +/- buttons), then swipe left between screen to ent
 - Watch send an "initiate action string" to AAPS (path "/nightscout_watch_initiateactionstring" on WearOS, channel "initiate action string", number xxx on Tizen watch) with string below: (note: to be confirmed in Tizen if plain text or if json string)
 
 ```
-wizard2 45 80
+wizard2 45 100	(default interface without percentage parameter)
+wizard2 45 80	(above example with percentage enable in settings)
 ```
 
 - The request action received by xxxUpdaterService is sent as String to ActionStringHandler (see below)
