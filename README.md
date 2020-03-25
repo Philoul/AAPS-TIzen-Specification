@@ -43,7 +43,62 @@
 | **12** | **Send confirmation to AAPS**  <br />An async. formated message is broadcasted  to AAPS to confirm action | Tizen Service,   WearOS Service            |
 | **13** | **Receive confirmation from watch**  <br />If acknowledge message is received by  AAPS, requested action is sent to dedicated plugin to be executed. | WatchUpdaterService,   TizenUpdaterService |
 
+### Action interface on WearOS / Tizen and associated broadcasts
 
+#### First example: Wizard action from watch (with acknowledge)
+
+- When you select in main menu "Wizard" (Assistant in screenshot), you have 1 or 2 screens to enter parameters (percentage is optional, according to settings).
+
+You enter Carbs amount (with +/- buttons), then swipe left between screen to enter the other parameters, until you reach the validation button.
+
+<img src="images/WizardFromWatch.jpg">
+
+
+
+- Watch send an "initiate action string" to AAPS (path "/nightscout_watch_initiateactionstring" on WearOS, channel "initiate action string", number xxx on Tizen watch) with string below: (note: to be confirmed in Tizen if plain text or if json string)
+
+```
+wizard2 45 80
+```
+
+- The request action received by xxxUpdaterService is sent as String to ActionStringHandler (see below)
+
+- ActionStringHandler decode, assure interface with all other plugins, generate a standard answer (rTitle, rMessage and rAction) 
+- This message is sent to watch threw a dataMap structure (WearOS), or JSON string (Tizen)
+
+<img src="images/WizardAnswer.jpg">
+
+In above picture Title = CONFIRM, Message = Carbs: 45g, ...
+
+Slide left (WearOS), to be decide according to interface in Tizen, tick button to confirm action
+
+- Watch send a "confirm action string", which is decoded in ActionStringHandler, and if it matches with initiate action string and if it is within Timeout then action is done in AAPS.
+
+#### Second example: Pump status request (without acknowledge)
+
+- When you select in Main Menu > Status > "Pump" (Pompe in screenshot), (it's a simple command with no parameters, a resquest status is sent to AAPS:
+
+<img src="images/PumpStatus.jpg">
+
+Message sent:
+
+```
+status pump
+```
+
+- ActionStringHandler decode, request information to other plugins, and generate the same kind of answer than for wizard or any other action (with rTitle, rMessage, rAction)
+
+<img src="images/PumpAnswer.jpg">
+
+Here Title = STATUS PUMP, message is longer and start with "Last conn: ..." (Dernière conn : ... in screenshot)
+
+For long messages, you have to swipe up to see the bottom of message, and swipe left to reach the button that closes the screen.
+
+
+
+## Android Studio SDK
+
+Installing sdk accessory in android studio follow **[this link](https://developer.samsung.com/mobile/galaxy-sdk-getting-started.html)**, see **[download page](https://developer.samsung.com/galaxy-accessory/download.html)** and **[sdk file](https://developer.samsung.com/galaxy-accessory/download.html?download=/glxyaccessory/file/694edfd4-d023-4e44-a34c-bb028852c53a)**
 
 ## Android Wear plugin
 
@@ -55,7 +110,49 @@ to be completed
 
 ### Samsung documentation
 
-to be completed
+#### Tizen Studio install
+
+[Prerequisites (Java Dev Kit version is very important)](https://developer.tizen.org/development/tizen-studio/download/prerequisites)
+
+[Download Tizen Studio](https://developer.tizen.org/development/tizen-studio/download)
+
+[Preparing the SAP Server Test Environment](https://developer.samsung.com/galaxy-watch-develop/creating-your-first-app/native-companion/galaxy-watch-emulator.html)
+
+[Installing Certificate Extension](https://developer.samsung.com/galaxy-watch-develop/getting-certificates/install.html)
+
+**[Creating Certificates](https://developer.samsung.com/galaxy-watch-develop/getting-certificates/create.html)**
+
+DUID are in Distributor certificate
+
+DUID for Emulators : (1rst DUID for emulators v4.0, v5.0 and v5.5, 2nd DUID for v2.3.1, v2.3.2 and v3.0)
+
+```
+1.0#ROYexsr3ytkS8Dr348OGkUKnyMk=
+
+1.0#OYbnFSmxwxVOk62e/cz11DU+J90=
+```
+
+**[Managing Certificate Profile](https://developer.samsung.com/galaxy-watch-develop/getting-certificates/manage.html)**
+
+**[Extending Certificate Expiry](https://developer.samsung.com/galaxy-watch-develop/getting-certificates/extend.html)**
+
+Certificate duration is only one year...
+
+**[Connect your watch to computer](https://developer.samsung.com/galaxy-watch-design/studio/faq.html#Why_cant_I_connect_to_my_device)** 
+
+After having enable debugger mode
+
+- Turn Off bluetooth
+- set display alway active
+- enable wifi
+- power off your watch near your PC (wifi access point)
+- Turn your watch on
+
+don't forget to reboot your watch after setting debugger mode
+
+wait 30-60 s after reboot keeping your eyes on it to enable RSA key
+
+
 
 ### .net (Visual Studio and Xamarin plugin)
 
@@ -80,21 +177,26 @@ to be completed
 
 ### Service configuration
 
-#### accessoryservices.xml:
+#### accessoryservices.xml: (android side)
+
+Note don't use @Strings/xxx in xml file (crash with )
 
 - serviceProfile1 
 
-  - id="/androidaps/tizen/app"
-  - name="androidaps_tizen_app"
-  - role="provider"
+  - id="/androidaps/tizen"
+  - name="androidaps_tizen"
+  - role="provider" or "consumer"
   - serviceImpl="info.nightscout.androidaps.plugins.general.wear.tizenintegration.TizenUpdaterService"
-  - serviceChannel : 104 (for tests), 
-    - 110: Tizen resend data request
-    - 115: Tizen cancel bolus
-    - 120: Tizen confirm action
-    - 121: AAPS action confirmation request
-    - 125: Tizen initiate action
-    - 
+    - serviceChannel : 104 (for tests), 
+      - 110: Tizen resend data request
+      - 115: Tizen cancel bolus
+      - 120: Tizen confirm action
+      - 121: AAPS action confirmation request
+      - 125: Tizen initiate action
+      - to be completed
+
+  
+
 
 - serviceProfile2 (not implemented, and to be confirm)
 
@@ -102,6 +204,8 @@ to be completed
 
   - name="androidaps_tizen_watchface"
 
+  - id="/androidaps/tizen"
+  - name="androidaps_tizen"
   - role="provider"
 
   - serviceImpl="info.nightscout.androidaps.plugins.general.wear.tizenintegration.TizenUpdaterService"
@@ -109,14 +213,10 @@ to be completed
   - serviceChannel : 105 (tests)
 
     - action send data (sendData and resendData)
-
-    - action send status
-
+- action send status
     - action send basals
 
-      
 
-  
 
 ### Watchface data
 
@@ -130,18 +230,18 @@ to be completed (keyword, data structure)
 
 Method:
 
-```
+```java
 public void onReceive(int channelID, byte[] data)
 ```
 
 
 
-| Path                                      | Action                                               |
-| ----------------------------------------- | ---------------------------------------------------- |
-| WEARABLE_RESEND_PATH = 110                | resendData()                                         |
-| WEARABLE_CANCELBOLUS_PATH = 115           | cancelBolus()                                        |
-| WEARABLE_INITIATE_ACTIONSTRING_PATH = 120 | ActionStringHandler.handleInitiate(actionstring)     |
-| WEARABLE_CONFIRM_ACTIONSTRING_PATH = 125  | ActionStringHandler.handleConfirmation(actionstring) |
+| Path                                    | Action                                               |
+| --------------------------------------- | ---------------------------------------------------- |
+| WEARABLE_RESEND_CH = 110                | resendData()                                         |
+| WEARABLE_CANCELBOLUS_CH = 115           | cancelBolus()                                        |
+| WEARABLE_INITIATE_ACTIONSTRING_CH = 120 | ActionStringHandler.handleInitiate(actionstring)     |
+| WEARABLE_CONFIRM_ACTIONSTRING_CH = 125  | ActionStringHandler.handleConfirmation(actionstring) |
 
 
 
@@ -174,13 +274,31 @@ public void onMessageReceived(MessageEvent event)
 
 #### ActionStringHandler : Class of Wear plugin
 
-method
+methods:
 
-```
+1. **For build an answer after an Initiate action String sent by watch:**
+
+```java
 public synchronized static void handleInitiate(String actionstring)
 ```
 
-action string split with regex "\\\s+"
+Responses messages has always the same structure (3 strings with a title, a response and an action contains the action that watch should answer to confirm Action: 
+
+```
+WearPlugin.getPlugin().requestActionConfirmation(rTitle, rMessage, rAction);
+```
+
+Note: When an initiate Action String does not require a confirmation, rAction is set to statusmessage or info.
+
+2. **For intent actions (only for fill, bolus, temptarget, wizard2, cppset, changeRequest and ecarb)**
+
+```
+public synchronized static void handleConfirmation(String actionString)
+```
+
+
+
+Note: action string is split in ActionStringHandler with regex "\\\s+"
 
 | Keyword (act[0])    | 1rst param (act[1])                     | 2nd param (act[2])               | 3rd param (act[3])               | 4th param (act[4])       |
 | ------------------- | --------------------------------------- | -------------------------------- | -------------------------------- | ------------------------ |
@@ -211,7 +329,7 @@ rAction : action for acknowledge
 
 
 
-```
+```java
 public synchronized static void handleConfirmation(String actionString)
 ```
 
