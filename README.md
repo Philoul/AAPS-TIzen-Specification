@@ -7,18 +7,17 @@
 Current jobshare between AndroidAPS and WearOS watch is quite confusing and should be improved:
 
 - Watchface settings are split between AAPS and WearOS
-- WearOS settings are too complicated
-  - Wearable app settings (show or not some actions in mains menu, with interface layout, ...)
+- Wear watch settings are too complicated with a mix of:
+  - General watch settings (vibration, date, units)
   - Transverse Watchface settings (which information is shown or not)
   - Dedicated settings according to watchface (Circle settings, background colors...)
+  - Wearable app settings (show or not some actions in mains menu, with interface layout, ...)
 
-
-
-Samsung doesn't allow User Interfaces in watchfaces package, so my proposal would be to put all watchfaces settings in AAPS (sub-menu prepared for them)...
+Samsung doesn't allow User Interfaces in watchfaces package, so my proposal would be to put all watchfaces settings in AAPS (sub-menu prepared for them), and to put all "Wearable app settings" in watch.
 
 => To be discussed
 
-(The way we will share and distribute Tizen package couls also have an impact because of Stores policies...)
+(The way we will share and distribute Tizen package could also have an impact because of Stores policies...)
 
 ## Data exchanged between AAPS and Watchface
 
