@@ -38,7 +38,7 @@ dataMap / json string
 	openApsStatus:Long,	// -1  or LoopPlugin.lastRun.lastTBREnact                   
 	bgi:String,			// BGI value formatted with sign, 1 decimal and localisation
     showBgi:Boolean,	// Setting value done in AAPS*
-	batteryLevel:int		// 0 if level > 30, 1 if level < 30
+	batteryLevel:int		// 1 if level > 30, 0 if level < 30
 }
 ```
 
