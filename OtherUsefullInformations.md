@@ -125,12 +125,6 @@ For long messages, you have to swipe up to see the bottom of message, and swipe 
 
 
 
-## ~~Android Studio SDK~~
-
-~~Installing sdk accessory in android studio follow **[this link](https://developer.samsung.com/mobile/galaxy-sdk-getting-started.html)**, see **[download page](https://developer.samsung.com/galaxy-accessory/download.html)** and **[sdk file~~**](https://developer.samsung.com/galaxy-accessory/download.html?download=/glxyaccessory/file/694edfd4-d023-4e44-a34c-bb028852c53a)**~~
-
-Android Studio SDK installed within AndroidAPS, so I don't think this is necessary
-
 ## Android Wear plugin
 
 to be completed
@@ -182,7 +176,16 @@ wait 30-60 s after reboot keeping your eyes on it to enable RSA key
 - Install and configure  [xamarin extension](https://developer.tizen.org/development/visual-studio-tools-tizen/installing-visual-studio-tools-tizen) in Visual Studio
 - Check you have installed the latest version of Visual Studio Tools for Tizen (3.1.0.0 or above)
 
+**Update Nuget Package to latest version:**
 
+1. in AndroidAPS_CompanionXAML Right Clic in dependencies thens elect "Manage Nuget Packages..."
+2. Click on Cog wheel (settings) in the top right of the screen (near Package source)
+3. Click on green "+" button to add another source for packages
+   - Give a name (i.e. nuget2) and enter https://tizen.myget.org/F/dotnet/api/v3/index.json in source field and clic on "Update", then OK to close option screen.
+4. Select in Package source "nuget2"
+   - Update  Tizen.NET.API6 to latest available version (v6.0.0.15094) 
+     - this update to Tizen.NET.API6.6.0.0.15094 and Tizen.NET.API5.5.0.0.14639...
+5. Update Nuget package on 
 
 ### native (Tizen Studio)
 
@@ -191,11 +194,11 @@ wait 30-60 s after reboot keeping your eyes on it to enable RSA key
   - Watchface can only include Service sub-project
 - To develop multi-packaged project in Tizen, you may follow **Developing Multiple Projects as a Combined Package** section in **[this link](https://developer.tizen.org/development/training/native-application/application-development-process#develop)**.
 - To do communication between android app and Tizen app please go through **Build your First Companion type application** section in **[this link](https://developer.samsung.com/galaxy-watch/develop/creating-your-first-app)**.
+  - [Setup SDK](https://developer.samsung.com/galaxy-watch-develop/creating-your-first-app/native-companion/setup-sdk.html)
+  - [Download SDK for detailled documentation](https://developer.samsung.com/galaxy-accessory/download.html)
 - To debug your application, you may try various application debugging methods e.g. debugging with logs as described in **[this link](https://developer.tizen.org/ko/development/training/native-application/application-development-process/debugging-applications?langredirect=1#methods)**.
 - You may try creating another app to enter Carbs quantity, Insulin Quantity, etc data and launch it from watchface app. In that case, you may follow **[this link](https://developer.tizen.org/development/guides/native-application/application-management/application-controls)**. 
   - this describe how we can launch (through **Application Control**) UI commands from service (when AAPS request acknowledge from watch) or from a watchface (when we want to launch a command)
-
-
 
 ## Data exchange
 
