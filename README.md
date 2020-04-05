@@ -4,30 +4,28 @@
 
 ## [SDK Installation](./SDK_Installation.md)
 
-Information on install of Tizen Studio (for development native C++ or html)
+[Tizen Studio install (only for native version of App and Wear in c++)](SDK_Installation.md#tizen-studio-install-only-for-native-version-of-app-and-wear)
 
-xamarin plugin in Visual Studio (development in C .net)
+[.net (Visual Studio and Xamarin plugin)](SDK_Installation.md#net-visual-studio-and-xamarin-plugin)
 
-SAP (Samsung Accessory protocol)
+[Usefull information for native dev (Tizen Studio)](SDK_Installation.md#native-tizen-studio)
 
 
 
 ## [AndroidAPS / Tizen interface specification](AAPS_Tizen_Interface_Specification.md)
 
-SAP Service Profile
+[SAP Setttings](AAPS_Tizen_Interface_Specification.md#sap-settings-to-be-confirmed-not-working-today)
 
-Data exchanged for 
+[Data exchanged for Watch face Update](AAPS_Tizen_Interface_Specification.md#data-exchanged-for-watchface-update)
 
-- Watch face Update
+[Setting Watch face](AAPS_Tizen_Interface_Specification.md#sendpreferences-androidapswatchface)
 
-- Watch face settings
+[Data exchanged for Aactions requests](AAPS_Tizen_Interface_Specification.md#data-exchanged-for-actions-requests)
 
-- Direct Actions (require confirmation for treatment)
+- Initiate Action 
+- Confirm Action
 
-  - Initiate Action 
-  - Confirm Action
 
-  
 
 ## [Other information](OtherUsefullInformations.md)
 
