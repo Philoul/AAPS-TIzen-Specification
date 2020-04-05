@@ -60,19 +60,17 @@ Type of data: JSON string (Array of bytes)
 	externalStatusString: String,
 	iobSum: String,		// Total IOB converted to string with 2 decimal and localisation
 	iobDetail: String,	// Detailled IOB converted to string with 2 decimal "(xx|yy)"
-	detailedIob:Boolean, // Setting value done in AAPS => To be discussed*
 	cob: String,		// Cob value converted in string
 	currentBasal:String,//percentage or basal rate ("U/h" according to activeTemp or not)
 	battery:String,		// phone battery in string
 	rigBattery:String,	// Synthesis of Phone Battery and sensor battery
 	openApsStatus:Long,	// -1  or LoopPlugin.lastRun.lastTBREnact                
 	bgi:String,			// BGI value formatted with sign, 1 decimal and localisation
-    showBgi:Boolean,	// Setting value done in AAPS*
 	batteryLevel:int	// 1 if level > 30, 0 if level < 30
 }
 ```
 
-
+Note: detailedIob and showBgi moved to [send preference Json String](#sendpreferences-androidapswatchface)
 
 ### SendData (AndroidAPS→Watchface)
 
@@ -106,7 +104,7 @@ Type of data: JSON string (Array of bytes)
 ```java
 {
 	timestamp:Long,			// System.currentTimeMillis()
-    wearsettings:Long		// All settings for watch (WearControl and watch face settings), a long value allow 64 On/Off settings that should be enough...
+	wearsettings:Long		// All settings for watch (WearControl and watch face settings), a long value allow 64 On/Off settings that should be enough...
 }
 ```
 
