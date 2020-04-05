@@ -14,7 +14,7 @@
 
 ## [AndroidAPS / Tizen interface specification](AAPS_Tizen_Interface_Specification.md)
 
-[SAP Setttings](AAPS_Tizen_Interface_Specification.md#sap-settings-to-be-confirmed-not-working-today)
+[SAP Settings](AAPS_Tizen_Interface_Specification.md#sap-settings-to-be-confirmed-not-working-today)
 
 [Data exchanged for Watch face Update](AAPS_Tizen_Interface_Specification.md#data-exchanged-for-watchface-update)
 
