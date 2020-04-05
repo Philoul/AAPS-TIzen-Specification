@@ -1,4 +1,4 @@
-# AAPS - Tizen specification (draft)
+# Usefull informations
 
 [TOC]
 
@@ -125,81 +125,6 @@ For long messages, you have to swipe up to see the bottom of message, and swipe 
 
 
 
-## Android Wear plugin
-
-to be completed
-
-
-
-## Samsung documentation
-
-### Tizen Studio install (only for native version of App and Wear)
-
-[Prerequisites (Java Dev Kit version is very important)](https://developer.tizen.org/development/tizen-studio/download/prerequisites)
-
-[Download Tizen Studio](https://developer.tizen.org/development/tizen-studio/download)
-
-[Preparing the SAP Server Test Environment](https://developer.samsung.com/galaxy-watch-develop/creating-your-first-app/native-companion/galaxy-watch-emulator.html)
-
-[Installing Certificate Extension](https://developer.samsung.com/galaxy-watch-develop/getting-certificates/install.html)
-
-**[Creating Certificates](https://developer.samsung.com/galaxy-watch-develop/getting-certificates/create.html)**
-
-- Don't forget to add the DUID of your watch in distributor certificate. before creating your certificate, connect your watch to device manager.
-- Don't add emulator's DUID to your distributor certificate (I spent one week to understand that it was the cause of Error-12 while uploading project to watch!)
-
-**[Extending Certificate Expiry](https://developer.samsung.com/galaxy-watch-develop/getting-certificates/extend.html)**
-
-Certificate duration is only one year...
-
-**[Connect your watch to computer](https://developer.samsung.com/galaxy-watch-design/studio/faq.html#Why_cant_I_connect_to_my_device)** 
-
-After having enable debugger mode
-
-- Turn Off bluetooth
-- set display alway active
-- enable wifi
-- power off your watch near your PC (wifi access point)
-- Turn your watch on
-
-don't forget to reboot your watch after setting debugger mode
-
-wait 30-60 s after reboot keeping your eyes on it to enable RSA key
-
-**[Managing Projects](https://developer.tizen.org/development/tizen-studio/native-tools)**
-
-
-
-### .net (Visual Studio and Xamarin plugin)
-
-- install Visual Studio community (VS2017 or VS2019)
-- Install and configure  [xamarin extension](https://developer.tizen.org/development/visual-studio-tools-tizen/installing-visual-studio-tools-tizen) in Visual Studio
-- Check you have installed the latest version of Visual Studio Tools for Tizen (3.1.0.0 or above)
-
-**Update Nuget Package to latest version:**
-
-1. in AndroidAPS_CompanionXAML Right Clic in dependencies thens elect "Manage Nuget Packages..."
-2. Click on Cog wheel (settings) in the top right of the screen (near Package source)
-3. Click on green "+" button to add another source for packages
-   - Give a name (i.e. nuget2) and enter https://tizen.myget.org/F/dotnet/api/v3/index.json in source field and clic on "Update", then OK to close option screen.
-4. Select in Package source "nuget2"
-   - Update  Tizen.NET.API6 to latest available version (v6.0.0.15094) 
-     - this update to Tizen.NET.API6.6.0.0.15094 and Tizen.NET.API5.5.0.0.14639...
-5. Update Nuget package on 
-
-### native (Tizen Studio)
-
-- You can not package an UI app with watch app. Go through the **Table: Combinations** in [**this link**](https://developer.tizen.org/ko/development/training/native-application/application-development-process?langredirect=1) to know about possible packaging combinations in detail.
-  - UI App can include Service and Widget sub-project
-  - Watchface can only include Service sub-project
-- To develop multi-packaged project in Tizen, you may follow **Developing Multiple Projects as a Combined Package** section in **[this link](https://developer.tizen.org/development/training/native-application/application-development-process#develop)**.
-- To do communication between android app and Tizen app please go through **Build your First Companion type application** section in **[this link](https://developer.samsung.com/galaxy-watch/develop/creating-your-first-app)**.
-  - [Setup SDK](https://developer.samsung.com/galaxy-watch-develop/creating-your-first-app/native-companion/setup-sdk.html)
-  - [Download SDK for detailled documentation](https://developer.samsung.com/galaxy-accessory/download.html)
-- To debug your application, you may try various application debugging methods e.g. debugging with logs as described in **[this link](https://developer.tizen.org/ko/development/training/native-application/application-development-process/debugging-applications?langredirect=1#methods)**.
-- You may try creating another app to enter Carbs quantity, Insulin Quantity, etc data and launch it from watchface app. In that case, you may follow **[this link](https://developer.tizen.org/development/guides/native-application/application-management/application-controls)**. 
-  - this describe how we can launch (through **Application Control**) UI commands from service (when AAPS request acknowledge from watch) or from a watchface (when we want to launch a command)
-
 ## Data exchange
 
 ### Service configuration
@@ -208,96 +133,46 @@ wait 30-60 s after reboot keeping your eyes on it to enable RSA key
 
 Note don't use @Strings/xxx in xml file (crash with )
 
+id and name must be short (30 characters max in documentation but doesn't work if too close than limit).
+
+=> Less than 20 characters preferable
+
 - serviceProfile1 
 
   - id="/androidaps/tizen"
-  - name="androidaps_tizen"
+  - name="androidaps.tizen"
   - role="provider" or "consumer"
   - serviceImpl="info.nightscout.androidaps.plugins.general.wear.tizenintegration.TizenUpdaterService"
-    - serviceChannel : 104 (for tests), 
-      - 110: Tizen resend data request
-      - 115: Tizen cancel bolus
-      - 120: Tizen confirm action
-      - 121: AAPS action confirmation request
-      - 125: Tizen initiate action
-      - to be completed
-
+    - serviceChannel : 
+      - 104 (for tests), 
+      - other (see [AndroidAPS / Tizen interface specification](AAPS_Tizen_Interface_Specification.md)
+  
   
 
-
-- serviceProfile2 (not implemented, and to be confirm)
-
-  - id="/androidaps/tizen/watchface"
-
-  - name="androidaps_tizen_watchface"
-
-  - id="/androidaps/tizen"
-  - name="androidaps_tizen"
-  - role="provider"
-
-  - serviceImpl="info.nightscout.androidaps.plugins.general.wear.tizenintegration.TizenUpdaterService"
-
-  - serviceChannel : 105 (tests)
-
-    - action send data (sendData and resendData)
-- action send status
-    - action send basals
-
-
-
-#### Setting sap:
+#### Setting sap is very, very tricky:
 
 - ServiceProfile
   - id
     - accessoryservices.xml
 
-| Paramètre                      | Tizen Studio                                         | Android Studio                |
-| ------------------------------ | ---------------------------------------------------- | ----------------------------- |
-| serviceProfile:id              | res/xml/Accessoryservices.xml                        | res/xml/Accessoryservices.xml |
-| serviceProfile:id              | sap.c: (sap_agent_initialize())                      |                               |
-| serviceProfile:name            | Tizenname                                            | Androidname                   |
-| serviceProfile:autoLaunchAppId | tizen-manifest:<br /><ui-application appid           |                               |
-| serviceProfile:serviceImpl     |                                                      | "com.xxxx.ServiceClass"       |
-| serviceProfile:role            | "provider"                                           | "consumer"                    |
-| Tizen main_filename.c          | sap.c (include main_filename.h)<br />main_filename.h |                               |
-|                                |                                                      |                               |
-|                                |                                                      |                               |
+| Paramètre                      | Tizen Studio                                         | Android Studio                                    |
+| ------------------------------ | ---------------------------------------------------- | ------------------------------------------------- |
+| serviceProfile:id              | res/xml/Accessoryservices.xml                        | res/xml/Accessoryservices.xml                     |
+| serviceProfile:id              | sap.c: (sap_agent_initialize())                      |                                                   |
+| serviceProfile:name            | less than 20 characters                              | should be the same on both sides                  |
+| serviceProfile:autoLaunchAppId | tizen-manifest:<br />ui-application appid            |                                                   |
+| serviceProfile:serviceImpl     |                                                      | "com.xxxx.ServiceClass" (adress of Service class) |
+| serviceProfile:role            | "provider"                                           | "consumer"                                        |
+| Tizen main_filename.c          | sap.c (include main_filename.h)<br />main_filename.h |                                                   |
+|                                |                                                      |                                                   |
+|                                |                                                      |                                                   |
 
+#### Received by TizenUpdaterService
 
-
-### Watchface data
-
-to be completed (keyword, data structure)
-
-### List of commands
-
-to be completed (keyword, data structure)
-
-#### Command received by TizenUpdaterService
-
-Method:
+Method: (sub class of ServiceConnection that extends SASocket)
 
 ```java
-public void onReceive(int channelID, byte[] data)
-```
-
-
-
-| Path                                    | Action                                               |
-| --------------------------------------- | ---------------------------------------------------- |
-| WEARABLE_RESEND_CH = 110                | resendData()                                         |
-| WEARABLE_CANCELBOLUS_CH = 115           | cancelBolus()                                        |
-| WEARABLE_INITIATE_ACTIONSTRING_CH = 120 | ActionStringHandler.handleInitiate(actionstring)     |
-| WEARABLE_CONFIRM_ACTIONSTRING_CH = 125  | ActionStringHandler.handleConfirmation(actionstring) |
-
-
-
-#### Command received by WatchUpdaterService
-
-Method:
-
-```java
-public void onMessageReceived(MessageEvent event)
+public void onReceive(int channelId, byte[] data)
 ```
 
 ```java
@@ -305,19 +180,10 @@ public void onMessageReceived(MessageEvent event)
 ```
 
 ```java
-	String actionstring = new String(event.getData());
+	String actionstring = new String(data);
 ```
 
-
-
-| Path                                                         | Action                                               |
-| ------------------------------------------------------------ | ---------------------------------------------------- |
-| WEARABLE_RESEND_PATH = "/nightscout_watch_data_resend"       | resendData()                                         |
-| WEARABLE_CANCELBOLUS_PATH = "/nightscout_watch_cancel_bolus" | cancelBolus()                                        |
-| WEARABLE_INITIATE_ACTIONSTRING_PATH = "/nightscout_watch_initiateactionstring" | ActionStringHandler.handleInitiate(actionstring)     |
-| WEARABLE_CONFIRM_ACTIONSTRING_PATH = "/nightscout_watch_confirmactionstring" | ActionStringHandler.handleConfirmation(actionstring) |
-
-
+Messages received from Action initiate channel or Action confirm channel are sent to ActionStringHandler
 
 #### ActionStringHandler : Class of Wear plugin
 
@@ -381,14 +247,6 @@ public synchronized static void handleConfirmation(String actionString)
 ```
 
 action string split with regex "\\\s+"
-
-
-
-## Settings
-
-To be decide if we include watchface settings (background color, hidden or visible informations, ...) in UI application in watch, or in AAPS wear plugin (dedicated screen prepared but empty today).
-
-At least we need an setting menu in UI application for user interface (which command is available in main menu)
 
 
 
