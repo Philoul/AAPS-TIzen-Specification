@@ -30,12 +30,16 @@ accessoryservices.xml (Tizen side) is:
          <serviceChannel id="105" dataRate="low" priority="low" reliability="enable" />
          <serviceChannel id="110" dataRate="low" priority="low" reliability="enable" />
          <serviceChannel id="115" dataRate="low" priority="low" reliability="enable" />
+         <serviceChannel id="120" dataRate="low" priority="low" reliability="enable" />
+         <serviceChannel id="125" dataRate="low" priority="low" reliability="enable" />
+         <serviceChannel id="200" dataRate="low" priority="low" reliability="enable" />
+         <serviceChannel id="205" dataRate="low" priority="low" reliability="enable" />
       </serviceProfile>
    </application>
 </resources>
 ```
 
-**Channel list needs to be updated (104 only for testing, other channels will be necessary)**
+**Channel list needs to be updated (104 only for testing, other channels will probably be necessary)**
 
 
 
@@ -194,7 +198,7 @@ Contains Basals rate, profile rate, Carbs, Bolus, SMB and prediction lines (mayb
 
 SendBGHistory (note: currently sent in a separate thread (real time constraints I suppose))
 
-Channel: tbd
+Channel: 125
 
 Type of data: JSON string (Array of bytes)
 
@@ -217,7 +221,7 @@ senStatus();
 
 ### Resend request (Watch→AndroidAPS)
 
-Channel: tbd
+Channel: 125
 
 Can be same channel than Resend
 
