@@ -125,9 +125,7 @@ For long messages, you have to swipe up to see the bottom of message, and swipe 
 
 
 
-## Data exchange
-
-### Service configuration
+### SAP configuration (tips and tricks)
 
 #### accessoryservices.xml: (android side)
 
@@ -166,6 +164,8 @@ id and name must be short (30 characters max in documentation but doesn't work i
 | Tizen main_filename.c          | sap.c (include main_filename.h)<br />main_filename.h |                                                   |
 |                                |                                                      |                                                   |
 |                                |                                                      |                                                   |
+
+## Android Wearplugin for Actions
 
 #### Received by TizenUpdaterService
 

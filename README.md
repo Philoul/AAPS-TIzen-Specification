@@ -27,14 +27,14 @@
 
 
 
-## [Other information](OtherUsefullInformations.md)
+## [Other informations](OtherUsefullInformations.md)
 
 Tizen distribution and policies
 
 How it works (communication flowchart and description)
 
-SAP configuration
+SAP configuration (tips and tricks)
 
-Some Android class for intent actions
+Android Wearplugin for Actions
 
 ## 
