@@ -237,7 +237,7 @@ For all treatments, there is an "Initiate action" that requires a "Confirm Actio
 
 Channel: 200
 
-Type of data: String (Array of bytes)
+Type of data: String (Array of bytes) or JSON String, tbc
 
 Initialize an action from watch is done threw a "command line" sent as String
 
@@ -256,6 +256,18 @@ New wizard request for 50 g carbs and 80% percentage of injection:
 ```
 wizard2 50 80
 ```
+
+
+
+If json string (not decided yet):
+
+```java
+{
+	InitiateActionString:String	// Command line
+}
+```
+
+
 
 #### available commands
 
@@ -292,13 +304,11 @@ Type of data: JSON string (Array of bytes)
 
 
 
-
-
 ### Confirm Action (watch→AndroidAPS)
 
 Channel: 205
 
-Type of data: String (Array of bytes)
+Type of data: String (Array of bytes) or JSON String, tbc
 
 ```
 rAction
@@ -308,7 +318,13 @@ rAction is memorized in AndroidAPS, to confirm initiate action, Watch should sen
 
 
 
+If json string (not decided yet):
 
+```java
+{
+	ConfirmActionString:String	// Command line, must contain rAction String received in confirmation request
+}
+```
 
 
 
