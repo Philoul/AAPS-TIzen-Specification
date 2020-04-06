@@ -159,7 +159,7 @@ Note: just a proposal, done with settings available in WearOS watches (currently
 |                       |                                                              |                            |
 |                       |                                                              |                            |
 
-### Setting Mask (Watch→AndroidAPS) (proposal)
+### Setting Mask (Watch→AndroidAPS) (proposal, but hide / show preferences seems to be complicated in Android applications...)
 
 Channel: 115
 

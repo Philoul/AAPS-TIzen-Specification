@@ -41,7 +41,8 @@ wait 30-60 s after reboot keeping your eyes on it to enable RSA key
 
 ## .net (Visual Studio and Xamarin plugin)
 
-- install Visual Studio community (VS2017 or VS2019)
+- install Visual Studio community **VS2017** (or VS2019 ?)
+  - See [.NET Application Overview](https://docs.tizen.org/application/dotnet/index)
 - Install and configure  [xamarin extension](https://developer.tizen.org/development/visual-studio-tools-tizen/installing-visual-studio-tools-tizen) in Visual Studio
 - Check you have installed the latest version of Visual Studio Tools for Tizen (3.1.0.0 or above)
 
@@ -57,6 +58,8 @@ wait 30-60 s after reboot keeping your eyes on it to enable RSA key
 5. Update Nuget package on 
 
 ## native (Tizen Studio)
+
+Tizen Studio and native  (c++) is an old environment. I think it's easier to install but not sure it's the best for this kind of project...
 
 - You can not package an UI app with watch app. Go through the **Table: Combinations** in [**this link**](https://developer.tizen.org/ko/development/training/native-application/application-development-process?langredirect=1) to know about possible packaging combinations in detail.
   - UI App can include Service and Widget sub-project
