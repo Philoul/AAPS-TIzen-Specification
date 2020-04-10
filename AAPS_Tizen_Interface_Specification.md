@@ -61,16 +61,16 @@ Type of data: JSON string (Array of bytes)
 
 ```java
 {
-	externalStatusString: String,
-	iobSum: String,		// Total IOB converted to string with 2 decimal and localisation
-	iobDetail: String,	// Detailled IOB converted to string with 2 decimal "(xx|yy)"
-	cob: String,		// Cob value converted in string
-	currentBasal:String,//percentage or basal rate ("U/h" according to activeTemp or not)
-	battery:String,		// phone battery in string
-	rigBattery:String,	// Synthesis of Phone Battery and sensor battery
-	openApsStatus:Long,	// -1  or LoopPlugin.lastRun.lastTBREnact                
-	bgi:String,			// BGI value formatted with sign, 1 decimal and localisation
-	batteryLevel:int	// 1 if level > 30, 0 if level < 30
+	"externalStatusString": String,
+	"iobSum": String,		// Total IOB converted to string with 2 decimal and localisation
+	"iobDetail": String,	// Detailled IOB converted to string with 2 decimal "(xx|yy)"
+	"cob": String,		// Cob value converted in string
+	"currentBasal":String,//percentage or basal rate ("U/h" according to activeTemp or not)
+	"battery":String,		// phone battery in string
+	"rigBattery":String,	// Synthesis of Phone Battery and sensor battery
+	"openApsStatus":Long,	// -1  or LoopPlugin.lastRun.lastTBREnact                
+	"bgi":String,			// BGI value formatted with sign, 1 decimal and localisation
+	"batteryLevel":int	// 1 if level > 30, 0 if level < 30
 }
 ```
 
@@ -84,16 +84,16 @@ Type of data: JSON string (Array of bytes)
 
 ```java
 {
-    sgvString:String,		// conversion to unit and to string for correct rounding and localisation already done
-    glucoseUnits:String,	// "mg/dl" or "mmol"
-    timestamp:Long,			// lastBG.dat
-    slopeArrow:String,		// "" if glucoseStatus=null, "\u21ca", ↓ "\u2193", ↘ "\u2198", → "\u2192", ↗ "\u2197", ↑ "\u2191", "\u21c8" according to value
-    delta:String,			// deltastring function used to make string with rounded value according to units and localisation (decimal "." or ",")
-    avgDelta:String,		// idem delta (deltastring function)
-    sgvLevel:Long,			// 0=in range, 1>highLine, -1<lowline (color of BG point)
-    sgvDouble:Double,		// lastBG.value for graph updating
-    high:Double,			// High range (for graph)
-    low:Double				// Low range (for graph)
+    "sgvString":String,		// conversion to unit and to string for correct rounding and localisation already done
+    "glucoseUnits":String,	// "mg/dl" or "mmol"
+    "timestamp":Long,			// lastBG.dat
+    "slopeArrow":String,		// "" if glucoseStatus=null, "\u21ca", ↓ "\u2193", ↘ "\u2198", → "\u2192", ↗ "\u2197", ↑ "\u2191", "\u21c8" according to value
+    "delta":String,			// deltastring function used to make string with rounded value according to units and localisation (decimal "." or ",")
+    "avgDelta":String,		// idem delta (deltastring function)
+    "sgvLevel":Long,			// 0=in range, 1>highLine, -1<lowline (color of BG point)
+    "sgvDouble":Double,		// lastBG.value for graph updating
+    "high":Double,			// High range (for graph)
+    "low":Double				// Low range (for graph)
 }
 ```
 
@@ -107,8 +107,8 @@ Type of data: JSON string (Array of bytes)
 
 ```java
 {
-	timestamp:Long,			// System.currentTimeMillis()
-	wearsettings:Long		// All settings for watch (WearControl and watch face settings), a long value allow 64 On/Off settings that should be enough...
+	"timestamp":Long,			// System.currentTimeMillis()
+	"wearsettings":Long		// All settings for watch (WearControl and watch face settings), a long value allow 64 On/Off settings that should be enough...
 }
 ```
 
@@ -169,8 +169,8 @@ Type of data: JSON string (Array of bytes)
 
 ```java
 {
-	watchfaceName:String,	// Watch face name
-    settingsMask:Long		// define settings that must be shown in AndroidAPS menu
+	"watchfaceName":String,	// Watch face name
+    "settingsMask":Long		// define settings that must be shown in AndroidAPS menu
 }
 ```
 
