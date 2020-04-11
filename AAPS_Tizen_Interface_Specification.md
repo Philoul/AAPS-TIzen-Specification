@@ -34,12 +34,31 @@ accessoryservices.xml (Tizen side) is:
          <serviceChannel id="125" dataRate="low" priority="low" reliability="enable" />
          <serviceChannel id="200" dataRate="low" priority="low" reliability="enable" />
          <serviceChannel id="205" dataRate="low" priority="low" reliability="enable" />
+         <serviceChannel id="210" dataRate="low" priority="low" reliability="enable" />
+         <serviceChannel id="220" dataRate="low" priority="low" reliability="enable" />
+         <serviceChannel id="225" dataRate="low" priority="low" reliability="enable" />
+         <serviceChannel id="230" dataRate="low" priority="low" reliability="enable" />
       </serviceProfile>
    </application>
 </resources>
 ```
 
 **Channel list needs to be updated (104 only for testing, other channels will probably be necessary)**
+
+| Channel | Use                                                          | Direction  |
+| ------- | ------------------------------------------------------------ | ---------- |
+| 104     | test and debug                                               | both       |
+| 105     | Send Status                                                  | AAPS→Watch |
+| 110     | Send BG datas                                                | AAPS→Watch |
+| 115     | Send Preference (to watch) or send Preference mask (to AAPS) | both       |
+| 120     | Resend BG history datas (to watch) or request resend (to AAPS) | both       |
+| 125     | Send basals (+ all graph datas)                              | AAPS→Watch |
+| 200     | Initiate action                                              | Watch→AAPS |
+| 205     | Confirmation Request (to watch) or Confirm Action (to AAPS)  | both       |
+| 210     | Send Cancel notification                                     | AAPS→Watch |
+| 220     | Bolus Progress                                               | AAPS→Watch |
+| 225     | Cancel Bolus                                                 | Watch→AAPS |
+| 230     | Open settings                                                | AAPS→Watch |
 
 
 
