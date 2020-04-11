@@ -80,26 +80,26 @@ Note: detailedIob and showBgi moved to [send preference Json String](#sendprefer
 
 Channel: 110
 
-Type of data: JSON string (Array of bytes)
+Type of data: JSON string (Array of bytes) (dataMapSingleBG)
 
 ```java
 {
     "sgvString":String,		// conversion to unit and to string for correct rounding and localisation already done
     "glucoseUnits":String,	// "mg/dl" or "mmol"
-    "timestamp":Long,			// lastBG.dat
-    "slopeArrow":String,		// "" if glucoseStatus=null, "\u21ca", ↓ "\u2193", ↘ "\u2198", → "\u2192", ↗ "\u2197", ↑ "\u2191", "\u21c8" according to value
+    "timestamp":Long,		// lastBG.dat
+    "slopeArrow":String,	// "" if glucoseStatus=null, "\u21ca", ↓ "\u2193", ↘ "\u2198", → "\u2192", ↗ "\u2197", ↑ "\u2191", "\u21c8" according to value
     "delta":String,			// deltastring function used to make string with rounded value according to units and localisation (decimal "." or ",")
     "avgDelta":String,		// idem delta (deltastring function)
-    "sgvLevel":Long,			// 0=in range, 1>highLine, -1<lowline (color of BG point)
+    "sgvLevel":Long,		// 0=in range, 1>highLine, -1<lowline (color of BG point)
     "sgvDouble":Double,		// lastBG.value for graph updating
     "high":Double,			// High range (for graph)
-    "low":Double				// Low range (for graph)
+    "low":Double			// Low range (for graph)
 }
 ```
 
 
 
-### sendPreferences (AndroidAPS→Watchface)
+### Preferences (AndroidAPS→Watchface)
 
 Channel: 115
 
@@ -107,7 +107,7 @@ Type of data: JSON string (Array of bytes)
 
 ```java
 {
-	"timestamp":Long,			// System.currentTimeMillis()
+	"timestamp":Long,		// System.currentTimeMillis()
 	"wearsettings":Long		// All settings for watch (WearControl and watch face settings), a long value allow 64 On/Off settings that should be enough...
 }
 ```
@@ -118,46 +118,46 @@ Type of data: JSON string (Array of bytes)
 
 Note: just a proposal, done with settings available in WearOS watches (currently split in AndroidAPS and Wear settings in Watch)
 
-| Setting               | definition                                                   | value                      |
-| --------------------- | ------------------------------------------------------------ | -------------------------- |
-| Wear Control          | Allow or not control of AAPS from Watch for treatments       | 0x00000000 0x00000001 (1)  |
-|                       | **Blood Glucose Section** (one spare)                        |                            |
-| Show BG value         | Show Blood Glucose Value                                     | 0x00000000 0x00000002 (2)  |
-| Show BG arrow         | Show Blood Glucose Arrow                                     | 0x00000000 0x00000004 (4)  |
-| Show delta            | Show delta                                                   | 0x00000000 0x00000008 (8)  |
-| Show 15' delta        | Show 15' delta                                               | 0x00000000 0x00000010 (16) |
-| Show 40' delta        | Show 40' delta (not available today in WearOS watches)       | 0x00000000 0x00000020 (32) |
-| Show detailled delta  | Show delta(s) with one more decimal                          | 0x00000000 0x00000040 (64) |
-|                       | **IOB / COB / BGI Section** (2 spares)                       |                            |
-| Show IOB              | Show total Insulin On Board                                  | 0x00000000 0x00000100      |
-| Show detailled IOB    | Show Bolus IOB and Basal IOB                                 | 0x00000000 0x00000200      |
-| Show COB              | Show Carb On Board                                           | 0x00000000 0x00000400      |
-| Show BGI              | Show Blood Glucose Impact                                    | 0x00000000 0x00000800      |
-|                       | **Battery Section** (2 spares)                               |                            |
-| Show phone battery    | Show Phone battery                                           | 0x00000000 0x00004000      |
-| Show Pump Battery     | Show Pump battery (not available today in WearOS watches)    | 0x00000000 0x00008000      |
-| Show Sensor Battery   | Show Pump battery (not available today in WearOS watches)    | 0x00000000 0x00010000      |
-| Show rig battery      | Show Rig battery (synthesis of phone battery and sensor battery) => could be improved with also pump battery | 0x00000000 0x00020000      |
-|                       | **Other settings Section** (1 spare)                         |                            |
-| Show basal rate       | Show Basal rate                                              | 0x00000000 0x00100000      |
-| Show loop status      | Show how many minutes since last loop run                    | 0x00000000 0x00200000      |
-| Show ago              | Show minutes since last CGM reading                          | 0x00000000 0x00400000      |
-|                       | **Graph Section** (0/2 spare(s))                             |                            |
-| Show Prediction Lines | Show prediction lines in graph                               | 0x00000000 0x01000000      |
-| Show Carbs            | Show Carb point in graph                                     | 0x00000000 0x02000000      |
-| Show Bolus            | Show Bolus point in graph                                    | 0x00000000 0x04000000      |
-| Show SMB as Bolus     |                                                              | 0x00000000 0x08000000      |
-| Show Profile          |                                                              | 0x00000000 0x10000000      |
-| Show Basal Rate       |                                                              | 0x00000000 0x20000000      |
-| Chart Timeframe       | 2 last bits for Timeframe (from 2 hours to 5 hours)<br />not sure this is necessary (in WearOS watch double tap in graph allow changing time frame) |                            |
-|                       | **Dedicated Watch face settings section** (proposal according to what existing currently in WearOS watches) |                            |
-| Show date             |                                                              | 0x00000001 0x00000000      |
-| White Background      | Switch Background from black to white                        |                            |
-| Matching divider      |                                                              |                            |
-|                       |                                                              |                            |
-|                       |                                                              |                            |
-|                       |                                                              |                            |
-|                       |                                                              |                            |
+| Setting               | definition                                                   | value                      | N°   |
+| --------------------- | ------------------------------------------------------------ | -------------------------- | ---- |
+| Wear Control          | Allow or not control of AAPS from Watch for treatments       | 0x00000000 0x00000001 (1)  | 00   |
+|                       | **Blood Glucose Section** (one spare)                        |                            |      |
+| Show BG value         | Show Blood Glucose Value                                     | 0x00000000 0x00000002 (2)  | 01   |
+| Show BG arrow         | Show Blood Glucose Arrow                                     | 0x00000000 0x00000004 (4)  | 02   |
+| Show delta            | Show delta                                                   | 0x00000000 0x00000008 (8)  | 03   |
+| Show 15' delta        | Show 15' delta                                               | 0x00000000 0x00000010 (16) | 04   |
+| Show 40' delta        | Show 40' delta (not available today in WearOS watches)       | 0x00000000 0x00000020 (32) | 05   |
+| Show detailled delta  | Show delta(s) with one more decimal                          | 0x00000000 0x00000040 (64) | 06   |
+|                       | **IOB / COB / BGI Section** (2 spares)                       |                            |      |
+| Show IOB              | Show total Insulin On Board                                  | 0x00000000 0x00000100      | 08   |
+| Show detailled IOB    | Show Bolus IOB and Basal IOB                                 | 0x00000000 0x00000200      | 09   |
+| Show COB              | Show Carb On Board                                           | 0x00000000 0x00000400      | 10   |
+| Show BGI              | Show Blood Glucose Impact                                    | 0x00000000 0x00000800      | 11   |
+|                       | **Battery Section** (2 spares)                               |                            |      |
+| Show phone battery    | Show Phone battery                                           | 0x00000000 0x00004000      | 14   |
+| Show Pump Battery     | Show Pump battery (not available today in WearOS watches)    | 0x00000000 0x00008000      | 15   |
+| Show Sensor Battery   | Show Pump battery (not available today in WearOS watches)    | 0x00000000 0x00010000      | 16   |
+| Show rig battery      | Show Rig battery (synthesis of phone battery and sensor battery) => could be improved with also pump battery | 0x00000000 0x00020000      | 17   |
+|                       | **Other settings Section** (1 spare)                         |                            |      |
+| Show basal rate       | Show Basal rate                                              | 0x00000000 0x00100000      | 20   |
+| Show loop status      | Show how many minutes since last loop run                    | 0x00000000 0x00200000      | 21   |
+| Show ago              | Show minutes since last CGM reading                          | 0x00000000 0x00400000      | 22   |
+|                       | **Graph Section** (0/2 spare(s))                             |                            |      |
+| Show Prediction Lines | Show prediction lines in graph                               | 0x00000000 0x01000000      | 24   |
+| Show Carbs            | Show Carb point in graph                                     | 0x00000000 0x02000000      | 25   |
+| Show Bolus            | Show Bolus point in graph                                    | 0x00000000 0x04000000      | 26   |
+| Show SMB as Bolus     |                                                              | 0x00000000 0x08000000      | 27   |
+| Show Profile          |                                                              | 0x00000000 0x10000000      | 28   |
+| Show Basal Rate       |                                                              | 0x00000000 0x20000000      | 29   |
+| Chart Timeframe       | 2 last bits for Timeframe (from 2 hours to 5 hours)<br />not sure this is necessary (in WearOS watch double tap in graph allow changing time frame) |                            | 30   |
+|                       | **Dedicated Watch face settings section** (proposal according to what existing currently in WearOS watches) |                            |      |
+| Show date             |                                                              | 0x00000001 0x00000000      | 32   |
+| White Background      | Switch Background from black to white                        |                            |      |
+| Matching divider      |                                                              |                            |      |
+|                       |                                                              |                            |      |
+|                       |                                                              |                            |      |
+|                       |                                                              |                            |      |
+|                       |                                                              |                            |      |
 
 ### Setting Mask (Watch→AndroidAPS) (proposal, but hide / show preferences seems to be complicated in Android applications...)
 
@@ -178,33 +178,17 @@ settings mask allow watch to define which settings can be set by user (default: 
 
 
 
-### SendBasals (AndroidAPS→Watchface)
-
-Channel: 120
-
-Type of data: JSON string (Array of bytes)
-
-```
-{
-	tbd
-}
-```
-
-Contains Basals rate, profile rate, Carbs, Bolus, SMB and prediction lines (maybe easier if we split in 6 dedicated Json strings?)
-
-
-
 ### Resend (AndroidAPS→Watchface)
 
 SendBGHistory (note: currently sent in a separate thread (real time constraints I suppose))
 
-Channel: 125
+Channel: 120
 
-Type of data: JSON string (Array of bytes)
+Type of data: JSON string (Array of bytes) (for dataMapSingleBG see [sendData](#senddata-androidapswatchface))
 
 ```
 {
-	tbd
+	"entries":[dataMapSingleBG]	// JSON Array of dataMapSingleBG 
 }
 ```
 
@@ -221,9 +205,72 @@ senStatus();
 
 ### Resend request (Watch→AndroidAPS)
 
+Channel: 120
+
+Same channel than Resend (send anything to this channel to request a resend)
+
+
+
+### SendBasals (AndroidAPS→Watchface)
+
 Channel: 125
 
-Can be same channel than Resend
+Type of data: JSON string (Array of bytes)
+
+```
+{
+	"basals":[basals], 				// JSON Array of basals
+	"temps":[temps],				// JSON Array of temp basal
+	"boluses":[boluses],			// JSON Array of bolus & carbs
+	"predictions":[predictions]		// JSON Array of predictions lines
+}
+```
+
+Contains Basals rate, profile rate, Carbs, Bolus, SMB and prediction lines (maybe easier if we split in 6 dedicated Json strings?)
+
+#### basals (basalMap)
+
+```java
+{
+	"starttime":long,	// start time of basal
+	"endtime":long,		// end time of basal
+    "amount",double		// amount
+}
+```
+
+#### temps (tempDatamap)
+
+```java
+{
+	"starttime":long,	// start time of basal
+	"startBasal":double,// basal level before
+	"endtime":long,		// end time of basal temp
+	"endbasal":double,	// basal level after
+    "amount",double		// temp basal level
+}
+```
+
+#### boluses (treatment Map)
+
+```java
+{
+	"date":long,		// time of treatment
+	"bolus":double,		// bolus level
+	"carbs":double,		// carb level
+	"isSMB":boolean,	// is SMB for bolus
+    "isValid",boolean	// is bolus valid or not (ex prefill)
+}
+```
+
+#### predictions (predictionMap)
+
+```java
+{
+	"timestamp":long,	// time of prediction
+	"sgv":double,		// level of prediction point (in mg/dl)
+	"color":int			// color of point
+}
+```
 
 
 
