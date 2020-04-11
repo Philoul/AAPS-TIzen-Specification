@@ -62,15 +62,16 @@ Type of data: JSON string (Array of bytes)
 ```java
 {
 	"externalStatusString": String,
+    "wearsettings":Long,	// All settings for watch (WearControl and watch face settings), a long value allow 64 On/Off settings that should be enough...
 	"iobSum": String,		// Total IOB converted to string with 2 decimal and localisation
 	"iobDetail": String,	// Detailled IOB converted to string with 2 decimal "(xx|yy)"
-	"cob": String,		// Cob value converted in string
+	"cob": String,			// Cob value converted in string
 	"currentBasal":String,//percentage or basal rate ("U/h" according to activeTemp or not)
 	"battery":String,		// phone battery in string
 	"rigBattery":String,	// Synthesis of Phone Battery and sensor battery
 	"openApsStatus":Long,	// -1  or LoopPlugin.lastRun.lastTBREnact                
 	"bgi":String,			// BGI value formatted with sign, 1 decimal and localisation
-	"batteryLevel":int	// 1 if level > 30, 0 if level < 30
+	"batteryLevel":int		// 1 if level > 30, 0 if level < 30
 }
 ```
 
@@ -111,6 +112,8 @@ Type of data: JSON string (Array of bytes)
 	"wearsettings":Long		// All settings for watch (WearControl and watch face settings), a long value allow 64 On/Off settings that should be enough...
 }
 ```
+
+This message request a "Setting Mask" answer from Tizen Watch
 
 
 
