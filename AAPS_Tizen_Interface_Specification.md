@@ -81,7 +81,7 @@ Type of data: JSON string (Array of bytes)
 ```java
 {
 	"externalStatusString": String,
-    "wearsettings":Long,	// All settings for watch (WearControl and watch face settings), a long value allow 64 On/Off settings that should be enough...
+	"wearsettings":Long,	// All settings for watch (WearControl and watch face settings), a long value allow 64 On/Off settings that should be enough...
 	"iobSum": String,		// Total IOB converted to string with 2 decimal and localisation
 	"iobDetail": String,	// Detailled IOB converted to string with 2 decimal "(xx|yy)"
 	"cob": String,			// Cob value converted in string
@@ -104,16 +104,16 @@ Type of data: JSON string (Array of bytes) (dataMapSingleBG)
 
 ```java
 {
-    "sgvString":String,		// conversion to unit and to string for correct rounding and localisation already done
-    "glucoseUnits":String,	// "mg/dl" or "mmol"
-    "timestamp":Long,		// lastBG.dat
-    "slopeArrow":String,	// "" if glucoseStatus=null, "\u21ca", ↓ "\u2193", ↘ "\u2198", → "\u2192", ↗ "\u2197", ↑ "\u2191", "\u21c8" according to value
-    "delta":String,			// deltastring function used to make string with rounded value according to units and localisation (decimal "." or ",")
-    "avgDelta":String,		// idem delta (deltastring function)
-    "sgvLevel":Long,		// 0=in range, 1>highLine, -1<lowline (color of BG point)
-    "sgvDouble":Double,		// lastBG.value for graph updating
-    "high":Double,			// High range (for graph)
-    "low":Double			// Low range (for graph)
+	"sgvString":String,		// conversion to unit and to string for correct rounding and localisation already done
+	"glucoseUnits":String,	// "mg/dl" or "mmol"
+	"timestamp":Long,		// lastBG.dat
+	"slopeArrow":String,	// "" if glucoseStatus=null, "\u21ca", ↓ "\u2193", ↘ "\u2198", → "\u2192", ↗ "\u2197", ↑ "\u2191", "\u21c8" according to value
+	"delta":String,			// deltastring function used to make string with rounded value according to units and localisation (decimal "." or ",")
+	"avgDelta":String,		// idem delta (deltastring function)
+	"sgvLevel":Long,		// 0=in range, 1>highLine, -1<lowline (color of BG point)
+	"sgvDouble":Double,		// lastBG.value for graph updating
+	"high":Double,			// High range (for graph)
+	"low":Double			// Low range (for graph)
 }
 ```
 
@@ -127,8 +127,8 @@ Type of data: JSON string (Array of bytes)
 
 ```java
 {
-	"timestamp":Long,		// System.currentTimeMillis()
-	"wearsettings":Long		// All settings for watch (WearControl and watch face settings), a long value allow 64 On/Off settings that should be enough...
+	"timestamp":Long,	// System.currentTimeMillis()
+	"wearsettings":Long	// All settings for watch (WearControl and watch face settings), a long value allow 64 On/Off settings that should be enough...
 }
 ```
 
@@ -192,7 +192,7 @@ Type of data: JSON string (Array of bytes)
 ```java
 {
 	"watchfaceName":String,	// Watch face name
-    "settingsMask":Long		// define settings that must be shown in AndroidAPS menu
+	"settingsMask":Long		// define settings that must be shown in AndroidAPS menu
 }
 ```
 
@@ -239,10 +239,10 @@ Channel: 125
 
 Type of data: JSON string (Array of bytes)
 
-```
+```java
 {
-	"basals":[basals], 				// JSON Array of basals
-	"temps":[temps],				// JSON Array of temp basal
+	"basals":[basals], 			// JSON Array of basals
+	"temps":[temps],			// JSON Array of temp basal
 	"boluses":[boluses],			// JSON Array of bolus & carbs
 	"predictions":[predictions]		// JSON Array of predictions lines
 }
@@ -265,10 +265,10 @@ Contains Basals rate, profile rate, Carbs, Bolus, SMB and prediction lines (mayb
 ```java
 {
 	"starttime":long,	// start time of basal
-	"startBasal":double,// basal level before
+	"startBasal":double,	// basal level before
 	"endtime":long,		// end time of basal temp
 	"endbasal":double,	// basal level after
-    "amount",double		// temp basal level
+	"amount",double		// temp basal level
 }
 ```
 
@@ -280,7 +280,7 @@ Contains Basals rate, profile rate, Carbs, Bolus, SMB and prediction lines (mayb
 	"bolus":double,		// bolus level
 	"carbs":double,		// carb level
 	"isSMB":boolean,	// is SMB for bolus
-    "isValid",boolean	// is bolus valid or not (ex prefill)
+	"isValid",boolean	// is bolus valid or not (ex prefill)
 }
 ```
 
@@ -290,7 +290,7 @@ Contains Basals rate, profile rate, Carbs, Bolus, SMB and prediction lines (mayb
 {
 	"timestamp":long,	// time of prediction
 	"sgv":double,		// level of prediction point (in mg/dl)
-	"color":int			// color of point
+	"color":int		// color of point
 }
 ```
 
