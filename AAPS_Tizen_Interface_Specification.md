@@ -158,7 +158,7 @@ Note: just a proposal, done with settings available in WearOS watches (currently
 |                       | **Battery Section** (2 spares)                               |                            |      |
 | Show phone battery    | Show Phone battery                                           | 0x00000000 0x00004000      | 14   |
 | Show Pump Battery     | Show Pump battery (not available today in WearOS watches)    | 0x00000000 0x00008000      | 15   |
-| Show Sensor Battery   | Show Pump battery (not available today in WearOS watches)    | 0x00000000 0x00010000      | 16   |
+| Show Sensor Battery   | Show Sensor battery (not available today in WearOS watches)  | 0x00000000 0x00010000      | 16   |
 | Show rig battery      | Show Rig battery (synthesis of phone battery and sensor battery) => could be improved with also pump battery | 0x00000000 0x00020000      | 17   |
 |                       | **Other settings Section** (1 spare)                         |                            |      |
 | Show basal rate       | Show Basal rate                                              | 0x00000000 0x00100000      | 20   |
@@ -256,7 +256,7 @@ Contains Basals rate, profile rate, Carbs, Bolus, SMB and prediction lines (mayb
 {
 	"starttime":long,	// start time of basal
 	"endtime":long,		// end time of basal
-	"amount",double	// amount
+	"amount",double		// amount
 }
 ```
 
