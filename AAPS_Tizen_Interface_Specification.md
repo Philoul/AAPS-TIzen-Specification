@@ -208,7 +208,7 @@ Channel: 120
 
 Type of data: JSON string (Array of bytes) (for dataMapSingleBG see [sendData](#senddata-androidapswatchface))
 
-```
+```java
 {
 	"entries":[dataMapSingleBG]	// JSON Array of dataMapSingleBG 
 }
@@ -241,10 +241,10 @@ Type of data: JSON string (Array of bytes)
 
 ```java
 {
-	"basals":[basals], 			// JSON Array of basals
-	"temps":[temps],			// JSON Array of temp basal
-	"boluses":[boluses],			// JSON Array of bolus & carbs
-	"predictions":[predictions]		// JSON Array of predictions lines
+	"basals":[basals], 		// JSON Array of basals
+	"temps":[temps],		// JSON Array of temp basal
+	"boluses":[boluses],		// JSON Array of bolus & carbs
+	"predictions":[predictions]	// JSON Array of predictions lines
 }
 ```
 
@@ -256,7 +256,7 @@ Contains Basals rate, profile rate, Carbs, Bolus, SMB and prediction lines (mayb
 {
 	"starttime":long,	// start time of basal
 	"endtime":long,		// end time of basal
-    "amount",double		// amount
+	"amount",double	// amount
 }
 ```
 
