@@ -80,7 +80,6 @@ Type of data: JSON string (Array of bytes)
 
 ```java
 {
-	"externalStatusString": String,
 	"wearsettings":Long,	// All settings for watch (WearControl and watch face settings), a long value allow 64 On/Off settings that should be enough...
 	"iobSum": String,	// Total IOB converted to string with 2 decimal and localisation
 	"iobDetail": String,	// Detailled IOB converted to string with 2 decimal "(xx|yy)"
@@ -95,6 +94,8 @@ Type of data: JSON string (Array of bytes)
 ```
 
 Note: detailedIob and showBgi moved to [send preference Json String](#sendpreferences-androidapswatchface)
+
+wearsettings has to be confirmed according to preferences management
 
 ### SendData (AndroidAPS→Watchface)
 
@@ -119,9 +120,11 @@ Type of data: JSON string (Array of bytes) (dataMapSingleBG)
 
 
 
-### Preferences (AndroidAPS→Watchface)
+### Preferences (AndroidAPS→Watchface) (To be decided and confirmed according to preference management)
 
 Channel: 115
+
+This part is not developed today... 
 
 Type of data: JSON string (Array of bytes)
 
@@ -181,11 +184,13 @@ Note: just a proposal, done with settings available in WearOS watches (currently
 |                       |                                                              |                            |      |
 |                       |                                                              |                            |      |
 
-### Setting Mask (Watch→AndroidAPS) (proposal, but hide / show preferences seems to be complicated in Android applications...)
+### Setting Mask (Watch→AndroidAPS) (to be confirmed)
 
 Channel: 115
 
 Note: same channel than sendPreferences 
+
+This part is not developed today... Hide / show preferences seems to be complicated in Android applications...
 
 Type of data: JSON string (Array of bytes)
 
